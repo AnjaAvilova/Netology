@@ -32,7 +32,7 @@ public class StatisticaService {
     public int minSalesMonth(long[] sales) {
         int minMonth = 0;
         for (int i = 0; i < sales.length; i++) {
-            if (sales[i] >= sales[minMonth])
+            if (sales[i] <= sales[minMonth])
                 minMonth = i;
         }
         return minMonth + 1;
@@ -56,7 +56,7 @@ public class StatisticaService {
         long midd = 0;
         for (long sale : sales) {
             midd = (midd + sale) / 12;
-            if (sale < midd) {
+            if (sale > midd) {
                 calcMaxMid++;
             }
         }
