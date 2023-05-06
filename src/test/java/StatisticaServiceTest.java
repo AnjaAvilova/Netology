@@ -1,5 +1,8 @@
 import org.example.StatisticaService;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class StatisticaServiceTest {
     @Test
@@ -8,7 +11,8 @@ public class StatisticaServiceTest {
         long[] sale = {8, 15, 13, 15, 17, 20, 19, 20, 7, 14, 14, 18};
         long actual = service.sumSales(sale);
         long expected = 8 + 15 + 13 + 15 + 17 + 20 + 19 + 20 + 7 + 14 + 14 + 18;
-    }
+        assertEquals(expected, actual);
+            }
 
     @Test
     public void MidSaleMonthTest() {
@@ -16,37 +20,42 @@ public class StatisticaServiceTest {
         long[] sale = {8, 15, 13, 15, 17, 20, 19, 20, 7, 14, 14, 18};
         long actual = service.midSales(sale);
         long expected = (8 + 15 + 13 + 15 + 17 + 20 + 19 + 20 + 7 + 14 + 14 + 18) / 12;
+        assertEquals(expected, actual);
     }
 
     @Test
-    public void MaxSaleMonthTest() {
+    public void MaxSaleCountTest() {
         StatisticaService service = new StatisticaService();
         long[] sale = {8, 15, 13, 15, 17, 20, 19, 20, 7, 14, 14, 18};
-        long actual = service.maxSalesMonth(sale);
-        long expected = 6;
+        long actual = service.maxSalesCount(sale);
+        long expected = 2;
+        assertEquals(expected, actual);
     }
 
     @Test
-    public void MinSaleMonthTest() {
+    public void MinSaleCountTest() {
         StatisticaService service = new StatisticaService();
         long[] sale = {8, 15, 13, 15, 17, 20, 19, 20, 7, 14, 14, 18};
-        long actual = service.minSalesMonth(sale);
-        long expected = 9;
+        long actual = service.minSalesCount(sale);
+        long expected = 1;
+        assertEquals(expected, actual);
     }
 
     @Test
-    public void CalcMonthMinMidTest() {
+    public void minMidCountSalesTest() {
         StatisticaService service = new StatisticaService();
         long[] sale = {8, 15, 13, 15, 17, 20, 19, 20, 7, 14, 14, 18};
-        long actual = service.minSalesMonth(sale);
+        long actual = service.minMidCountSales(sale);
         long expected = 5;
+        assertEquals(expected, actual);
     }
 
     @Test
-    public void CalcMonthMaxMidTest() {
+    public void maxMidCountSalesTest() {
         StatisticaService service = new StatisticaService();
         long[] sale = {8, 15, 13, 15, 17, 20, 19, 20, 7, 14, 14, 18};
-        long actual = service.maxSalesMonth(sale);
+        long actual = service.maxMidCountSales(sale);
         long expected = 5;
+        assertEquals(expected, actual);
     }
 }

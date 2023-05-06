@@ -5,62 +5,83 @@ public class StatisticaService {
     public long sumSales(long[] sales) {
         long sum = 0;
         for (long sale : sales) {
-            sum = sum + sale;
+            sum = sum + sale; // сумма всех месяцев
 
         }
         return sum;
     }
 
-    public long midSales(long[] sales) {
+    public long midSales(long[] sales) { // среднее за год
         long mid = 0;
-        for (long sale : sales) {
-            mid = (mid + sale) / 12;
-        }
+        long sum = sumSales(sales);
+        mid = sum / sales.length;
         return mid;
     }
 
-    public int maxSalesMonth(long[] sales) {
-        int maxMonth = 0;
-//      int maxSales = sales[0];
+    public long maxSalesMonth(long[] sales) {
+        long max = sales[0];
+
         for (int i = 0; i < sales.length; i++) {
-            if (sales[i] >= sales[maxMonth])
-                maxMonth = i;
+            if (sales[i] > max)
+                max = sales[i];
         }
-        return maxMonth + 1;
+        return max;
     }
 
-    public int minSalesMonth(long[] sales) {
-        int minMonth = 0;
+    public long maxSalesCount(long[] sales) { //поиск кол-ва месяцев с мах продажей
+        long count = 0;
+        long max = maxSalesMonth(sales);
         for (int i = 0; i < sales.length; i++) {
-            if (sales[i] <= sales[minMonth])
-                minMonth = i;
-        }
-        return minMonth + 1;
-    }
-
-    public int calcMonthMinMid(long[] sales) {
-        int calcMinMid = 0;
-        long midd = 0;
-        for (long sale : sales) {
-            midd = (midd + sale) / 12;
-            if (sale < midd) {
-                calcMinMid++;
+            if (sales[i] == max) {
+                count++;
             }
         }
-        return calcMinMid;
-
+        return count;
     }
 
-    public int calcMonthMaxMid(long[] sales) {
-        int calcMaxMid = 0;
-        long midd = 0;
-        for (long sale : sales) {
-            midd = (midd + sale) / 12;
-            if (sale > midd) {
-                calcMaxMid++;
+    public long minSalesMonth(long[] sales) {
+        long min = sales[0];
+
+        for (int i = 0; i < sales.length; i++) {
+            if (sales[i] < min)
+                min = sales[i];
+        }
+        return min;
+    }
+
+    public long minSalesCount(long[] sales) { // кол-во месяцев с мin продажей
+        long count = 0;
+        long min = minSalesMonth(sales);
+        for (int i = 0; i < sales.length; i++) {
+            if (sales[i] == min) {
+                count++;
             }
         }
-        return calcMaxMid;
+        return count;
+    }
+
+
+    public long minMidCountSales(long[] sales) { //кол-во месяцев ниже среднего
+        long minMid = 0;
+        long mid = midSales(sales);
+        for (int i = 0; i < sales.length; i++) {
+            if (sales[i] < mid) {
+                minMid++;
+            }
+        }
+        return minMid;
+    }
+
+
+    public long maxMidCountSales(long[] sales) {// кол-во месяцев выше среднего
+        long maxMid = 0;
+        long mid = midSales(sales);
+        for (int i = 0; i < sales.length; i++) {
+            if (sales[i] > mid) {
+                maxMid++;
+            }
+        }
+        return maxMid;
 
     }
 
